@@ -1,5 +1,6 @@
 /* 
 Source code to a webpage that shows the weather in De Bilt in 2014. 
+
 Rianne Schoon, 10742794
 
 sources and credits for hints:
