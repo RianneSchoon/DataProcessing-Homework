@@ -1,0 +1,61 @@
+/*
+barchart.css
+Style sheet to a webpage that shows the monthly rainfall in De Bilt in 2015.
+
+Rianne Schoon, 10742794
+
+Sources and credits:
+- http://bl.ocks.org/Caged/6476579
+*/
+
+/* font for the axes ticks */
+body {
+  font: 11px sans-serif;
+}
+
+/* color axes line dark blue */
+.axis path,
+.axis line {
+  fill: none;
+  stroke: midnightblue;
+  shape-rendering: crispEdges;
+}
+
+/* bar color default */
+.bar {
+  fill: deepskyblue;
+}
+
+/* bar color on hover */
+.bar:hover {
+  fill: dodgerblue ;
+}
+
+/* make tooltips*/
+.d3-tip {
+  line-height: 1;git
+  padding: 12px;
+  background: lightblue;
+  color: midnightblue;
+  border-radius: 2px;
+}
+
+ /* small point for tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: lightblue;
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+ /* fix so that point stays centered in tooltips on bars next to a higher bar */
+ .d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
