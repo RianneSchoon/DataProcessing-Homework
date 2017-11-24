@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<!-- 
+scatterplot.html
+Webpage with scatterplot showing the interaction between 
+happy life years and average life expectancy per country. 
+  
+Rianne Schoon, 10742794 
+-->
+
+<html>
+  <head>
+    <title>Scatterplot</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="scatterplot.css"></link>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  </head>
+  <body>
+    <div class="pageinfo">
+      <h1 class="title">Welcome to this visualization of happiness in life across the world!</h1>
+      <p class="intro">
+        This is an interactive scatterplot!
+      </p>
+      <p class="intro">
+        Click on the legend to select the region of which you want to see the happiness.<br>
+        The selected data now pops out! Click the legend again to unselect or select other data. <br> 
+        Hover over the dots to see that country and its Gross Domestic Product (GDP) in dollars.<br>
+        Hovering is also possible while a subset of the data is selected.<br>
+        Note that GDP is translated to the size of the dots.
+      </p>
+    </div>
+    <div class="chart"></div>
+    <script src="scatterplot.js" charset="utf-8"></script>
+    <div class="source">
+      <a href="http://happyplanetindex.org/resources/">Data source: happyplanetindex.org</a>
+    </div>
+  </body>
+</html>
