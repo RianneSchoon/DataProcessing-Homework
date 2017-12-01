@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<!-- 
+line.html
+Webpage with line graph that shows the temperature 
+in de Bilt in 1996 and in 2016. 
+  
+Rianne Schoon, 10742794 
+-->
+
+<html>
+  <head>
+    <title>Line</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="line.css"></link>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/queue.v1.min.js"></script>
+    <script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  </head>
+  <body>
+    <div class="pageinfo">
+      <h1 class="title">Welcome to this visualization temperature in De Bilt in 1996 and 2016</h1>
+      <h2 class="name">Rianne Mirjam Schoon</h2>
+      <p class="intro">
+        This is an interactive line chart!
+      </p>
+      <p class="intro">
+        Hover over the lines to see specifications.<br>
+        Select subsets of data by clicking on the legend, and unselect by clicking again!<br>
+      </p>
+    </div>
+    <div class="chart">
+    	<script src="line.js" charset="utf-8"></script>
+    </div>
+    <div class="source">
+      <a href="http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi">Data source: Royal Dutch Meteorological Institute (KNMI)</a>
+    </div>
+  </body>
+</html>

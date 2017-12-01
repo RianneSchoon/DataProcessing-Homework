@@ -1,0 +1,84 @@
+/*
+line.css
+Style sheet to a webpage that shows the temperature 
+in de Bilt in 1996 and in 2016.
+
+Rianne Schoon, 10742794
+
+Sources and credits:
+- 
+*/
+
+/* font for axes and ticks */
+body {
+  font: 10px tahoma;
+  text-align: center;
+  color: black;
+}
+
+/* name cursive */
+.name {
+  font-style: italic;
+}
+
+/* intro and data source styling */
+.intro,
+.source {
+  font: 15px tahoma;
+  line-height: 1.5;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+/* instruction text */
+.intro {
+  color: darkslategrey;
+}
+
+/* center chart */
+svg {
+  margin: auto;
+  display: block;
+}
+
+/* color axes */
+.axis path,
+.line {
+  fill: none;
+  stroke: darkslategray;
+  shape-rendering: crispEdges;
+}
+
+/* dot color default */
+.dot {
+  stroke: white;
+}
+
+/* make tooltips*/
+.d3-tip {
+  line-height: 1.5;
+  padding: 10px;
+  background: #bee3e8;
+  color: midnightblue;
+  border-radius: 2px;
+}
+
+ /* small point for tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: powderblue;
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+ /* fix so that point stays centered on tooltips */
+ .d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
