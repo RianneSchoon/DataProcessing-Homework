@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<!-- 
+line.html
+
+Webpage that shows two linked visualizations:
+- World map showing homicide data per country
+- Scatter plot showing per country:
+		- Life expectancy
+		- Happy life years
+		- Gross Domestic Product
+		- Continent
+  
+Rianne Schoon, 10742794 
+-->
+
+<html>
+	<head>
+		<title>Linked</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="linked.css"></link>
+		<script src="//d3js.org/d3.v3.min.js"></script>
+		<script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="//d3js.org/queue.v1.min.js"></script>
+    <!-- <script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
+	</head>
+	<body>
+		<div class="pageinfo">
+      <h1 class="title">Welcome to these linked views!</h1>
+      <h2 class="name">Rianne M. Schoon</h2>
+      <p class="intro">
+        These are two interactively linked visualizations! <br>
+        Selecting data in one part has an effect on the other part.<br>
+        Hovering over the data also works in both views!<br>
+      </p>
+      <p class="intro">
+      	The world map shows the homicide rates per country.<br>
+      	The scatter plot then shows the Life Expectancy of that country,<br>
+      	as well as the Happy Life Years, and the Gross Domestic Product<br>
+      	Data are plotted by continent, to facilitate country comparison.
+      </p>
+    </div>
+    <div class="chart" id="container">
+
+    </div>
+    <div class="chart" id="scatter">
+
+    </div>
+    <script src="linked.js" charset="utf-8"></script>
+    <div class="source">
+      <a href="https://data.worldbank.org/indicator/VC.IHR.PSRC.P5">Data source homicides: The World Bank</a><br>
+      <a href="http://happyplanetindex.org/resources/">Data source happiness: Happy Planet Index</a>
+    </div>
+  </body>
+</html>
