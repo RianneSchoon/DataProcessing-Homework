@@ -10,22 +10,11 @@ Sources and credits:
 ---------------------------------------------------------------------------- */
 
 // load all datasets before display
-window.onload = function() {
-  queue()
-    .defer(d3.json, "data/world-topo-min.json")
-    .defer(d3.json, "murderdata.json")
-    .defer(d3.json, "dataWeek4.json")
-    .await(initAll);
-  };
-
-  // data highlighting in scatterplot via clicking on map
-  function mapSelect (country) {
-    // undo previous selection -> all dots stroked with white again
-    d3.select("#scatter").selectAll(".dot").style("stroke", "white").style("opacity", ".3")
-    // currently selected class (country name without spaces) gets black stroke
-    d3.select("#scatter").select("." + country.replace(/\s/g, '')).style("stroke", "black").style("stroke-width", "2px").style("opacity", "1");
-
-  };
+queue()
+  .defer(d3.json, "data/world-topo-min.json")
+  .defer(d3.json, "murderdata.json")
+  .defer(d3.json, "dataWeek4.json")
+  .await(initAll);
 
 //  init function calls functions to draw map and scatterplot
 function initAll(error, world, murderings, happiness) {
@@ -43,26 +32,30 @@ function initAll(error, world, murderings, happiness) {
 
 // draw the countries on the map
 function drawWorldMap (countries, murderRate) {
-  // map zoom functionality
+
+  // G map zoom functionality
   d3.select(window).on("resize", throttle);
 
-  // map zoom functionality
+  // G map zoom functionality
   var zoom = d3.behavior.zoom()
       .scaleExtent([1, 9])
       .on("zoom", move);
 
-  // set height and width
+  // G set height and width
   var width = document.getElementById('container').offsetWidth,
       height = width / 1.8;
 
-  // map variables
+  // G map variables
   var topo, projection, path, svg, g;
 
-  // map and scatterplot: enabling tooltip functionality
+  // G map and scatterplot: enabling tooltip functionality
   var tooltip = d3.select("#container").append("div").attr("class", "tooltip hidden");
 
-  // map dimensions setup
+  // G map dimensions setup
   function setupMap (width,height) {
+
+    console.log("setupMap aangeroepen!");
+
     projection = d3.geo.mercator()
       .translate([(width/2), (height/2)])
       .scale( width / 2 / Math.PI);
@@ -75,17 +68,16 @@ function drawWorldMap (countries, murderRate) {
         .attr("width", width)
         .attr("height", height)
         .call(zoom)
+        .on("click", click)
         .append("g");
     g = svg.append("g");
-
-    // draw countries on map
-    drawTopo(countries);
   }
 
-  // call the setup function so that the map can be drawn
+  // G call the setup function so that the map can be drawn
   setupMap(width,height);
 
-  // draw countries on map
+  // GET THE DATA HERE IN THE ORIGINAL CODE
+
   function drawTopo(countries) {
 
     //  draw equator
@@ -104,7 +96,6 @@ function drawWorldMap (countries, murderRate) {
         .attr("d", path)
         .attr("id", function(d,i) { return d.id; })
         .attr("title", function(d, i) { return d.properties.name; })
-        .on("click", function(d) { mapSelect(d.properties.name); })
         // TO DO: fill color according to murderdata (chloropleth)
         .style("fill", function(d, i) { return d.properties.color; });
 
@@ -115,6 +106,8 @@ function drawWorldMap (countries, murderRate) {
     // tooltips appear when mouse is over country - and follow mouse movements
     country
       .on("mousemove", function(d, i) {
+
+        console.log(murderRate[d.properties.name]);
 
         // mouse place on the map
         var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); });
@@ -131,10 +124,10 @@ function drawWorldMap (countries, murderRate) {
       // when mouse moves away, tooltip disappears
       .on("mouseout",  function(d, i) {
         tooltip.classed("hidden", true);
-      })
+      }); 
   }
 
-  // when user changes map on page, redraw it
+  // 
   function redrawMap() {
 
     console.log("redrawMap aangeroepen!");
@@ -146,10 +139,11 @@ function drawWorldMap (countries, murderRate) {
     drawTopo(countries);
   }
 
-  // update map scale when user zooms map
+  // 
   function move() {
 
-    // 
+    console.log("move functie aangeroepen!");
+
     var t = d3.event.translate;
     var s = d3.event.scale; 
     zscale = s;
@@ -171,17 +165,26 @@ function drawWorldMap (countries, murderRate) {
     d3.selectAll(".country").style("stroke-width", 1.5 / s);
   }
 
-  // when map is moved, update
-  var throttleTimer = 0
+  var throttleTimer;
+
   function throttle() {
-      window.clearTimeout(throttleTimer);
-        throttleTimer = window.setTimeout(function() {
-          redrawMap();
-        }, 200);
+
+  console.log("throttle functie aangeroepen!");
+
+    window.clearTimeout(throttleTimer);
+      throttleTimer = window.setTimeout(function() {
+        redrawMap();
+      }, 200);
+  }
+
+  //geo translation on mouse click in map
+  function click() {
+    var latlon = projection.invert(d3.mouse(this));
+    console.log(latlon);
   }
 }
 
-// draw the scatterplot
+// get the data for the scatterplot
 function drawScatter(happiness) {
 
   // set height, width and margins
@@ -212,11 +215,22 @@ function drawScatter(happiness) {
 
   // append scatterplot svg to html body
   var svg = d3.select("#scatter").append("svg")
-      .attr("id", "scatter_svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // // scatterplot: instantiate tip functionality
+  // var tip = d3.tip()
+  //   .attr('class', 'd3-tip')
+  //   .offset([-10, 0])
+  //   .html(function(d) {
+  //     return "<strong>Country:</strong> <span style='color:midnightblue' style='font:tahoma'>" + d.Country + "</span>" + "<br>" +
+  //     "<strong>GDP:</strong> <span style='color:midnightblue' style='font:sans serif'>" + "$" + d.GDPCapita + "</span>";
+  //   });
+
+  // // call tips, so that they appear when mouse hovers over the bar
+  // svg.call(tip);
 
   // global: keep track of subselection of data in scatterplot
   var clicked = 0;
@@ -277,11 +291,47 @@ function drawScatter(happiness) {
   scatterDot = svg.selectAll(".dot")
       .data(happiness)
     .enter().append("circle")
-      .attr("class", function(d) { return "dot " + d.Region.replace(/\s/g, '') + " " + d.Country.replace(/\s/g, ''); })
+      .attr("class", function(d) { return "dot " + d.Region.replace(/\s/g, ''); })
       .attr("r", function(d) { return rscale(d.GDPCapita); })
       .attr("cx", function(d) { return x(d.happyLifeYears); })
       .attr("cy", function(d) { return y(d.AvLifeExp); })
       .style("fill", function(d) { return color(d.Region); })
+
+
+  // // dots
+  // var scatterDot = svg.selectAll(".dot").data(happiness);
+  console.log(scatterDot);
+
+  // map and scatterplot: enabling tooltip functionality
+  var tooltip = d3.select(".dot").append("div").attr("class", "tooltip hidden");
+  // // offsets for tooltips
+  // var offsetL = document.getElementById('container').offsetLeft + 20;
+  // var offsetT = document.getElementById('container').offsetTop + 10;
+
+
+  scatterDot
+    .on("mousemove", function(d, i) {
+
+    // mouse place on the map
+    var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); });
+
+    // tooltip is visible when mouse moves on country
+    tooltip.classed("hidden", false)
+      // tooltip placement
+      // .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT)+"px")
+      // .html(d.properties.name + murderRate[d.properties.name]);
+      .html("<strong>Country:</strong> <span style='color:midnightblue'>" + happiness.Country + "</span>" + "<br>" +
+        "<strong>Murders:</strong> <span style='color:midnightblue'>" + happiness.GDPCapita + "</span>");
+    })
+
+    // when mouse moves away, tooltip disappears
+    .on("mouseout",  function(d, i) {
+      tooltip.classed("hidden", true);
+    }); 
+
+      // // tip-on-hovering functionality
+      // .on('mouseover', tip.show)
+      // .on('mouseout', tip.hide);
 
   // create legend
   var legend = svg.selectAll(".legend")
@@ -289,8 +339,9 @@ function drawScatter(happiness) {
     .enter().append("g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(" + (width + margin.right - 30) + "," + i * 25 + ")"; })
+
       // legend data selection functionality
-      .on('click', function(region) { return legendSelect(region); });
+      .on('click', function(region) { return legendSelect(region); })
 
   // legend colored rectangles
   legend.append("rect")
@@ -311,7 +362,7 @@ function drawScatter(happiness) {
   function legendSelect (region) {
     // if no subset of data has been clicked yet: clicked subset of data pops out
     if (clicked == 0) {
-      d3.selectAll(".dot").style("opacity", .3).style("stroke-width", "1px").style("stroke", "white");
+      d3.selectAll(".dot").style("opacity", .3)
       // the "replace" part: no spaces in the class name (see line 147)
       d3.selectAll("." + region.replace(/\s/g, '')).style("opacity", 1);
       clickedData = region
@@ -319,7 +370,7 @@ function drawScatter(happiness) {
     }
     // if a selected data subset is clicked again: reset graph to no pop-outs
     else if (clicked == 1 && region == clickedData) {
-      d3.selectAll(".dot").style("opacity", 1).style("stroke-width", "1px").style("stroke", "white");
+      d3.selectAll(".dot").style("opacity", 1);
       clickedData = region
       clicked = 0;
     } 
@@ -327,38 +378,29 @@ function drawScatter(happiness) {
     // switch pop-out to last clicked subset
     else if (clicked == 1 && region != clickedData) {
       d3.selectAll(".dot").style("opacity", .3);
-      d3.selectAll("." + region.replace(/\s/g, '')).style("opacity", 1).style("stroke-width", "1px").style("stroke", "white");
+      d3.selectAll("." + region.replace(/\s/g, '')).style("opacity", 1);
       clickedData = region
       clicked = 1;
     } 
   };
-
-  // map and scatterplot: enabling tooltip functionality
-  var tooltip_s = d3.select("#scatter").append("div").attr("class", "tooltip sct hidden");
-
-  // offsets for tooltips
-  var offsetL = document.getElementById('scatter').offsetLeft + 50;
-  var offsetT = document.getElementById('scatter').offsetTop + 40;
-
-  // tooltips appear when mouse is over country - and follow mouse movements
-  scatterDot
-    .on("mouseover", function(d, i) {
-
-      var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); });
-      console.log(mouse)
-      // tooltip is visible when mouse moves on country
-      tooltip_s.classed("hidden", false)
-        // tooltip placement
-        // .style("x", 20)
-        // .style("y", 20)
-        .attr("style", "left:" + (mouse[0] + offsetL) + "px;top:" + (mouse[1] + offsetT)+"px")
-        // .html(d.properties.name + murderRate[d.properties.name]);
-        .html("<strong>Country:</strong> <span style='color:midnightblue'>" + d.Country + "</span>" + "<br>" +
-          "<strong>GDP:</strong> <span style='color:midnightblue'>" + d.GDPCapita + "</span>");
-    })
-
-    // when mouse moves away, tooltip disappears
-    .on("mouseout",  function(d, i) {
-      tooltip_s.classed("hidden", true);
-    })
 };
+
+// //function to add points and text to the map (used in plotting capitals)
+// function addpoint(lat,lon,text) {
+//   var gpoint = g.append("g").attr("class", "gpoint");
+//   var x = projection([lat,lon])[0];
+//   var y = projection([lat,lon])[1];
+//   gpoint.append("svg:circle")
+//         .attr("cx", x)
+//         .attr("cy", y)
+//         .attr("class","point")
+//         .attr("r", 1.5);
+//   //conditional in case a point has no associated text
+//   if(text.length>0){
+//     gpoint.append("text")
+//           .attr("x", x+2)
+//           .attr("y", y+2)
+//           .attr("class","text")
+//           .text(text);
+//   }
+// }

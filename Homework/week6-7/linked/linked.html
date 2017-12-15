@@ -16,12 +16,13 @@ Rianne Schoon, 10742794
 
 <html>
 	<head>
-		<title>Linked</title>
 		<meta charset="utf-8">
+		<title>Linked</title>
 		<link rel="stylesheet" href="linked.css"></link>
 		<script src="//d3js.org/d3.v3.min.js"></script>
 		<script src="//d3js.org/topojson.v1.min.js"></script>
     <script src="//d3js.org/queue.v1.min.js"></script>
+    <!-- // <script src="library.js" charset="utf-8"></script> -->
     <!-- <script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
 	</head>
 	<body>
@@ -29,22 +30,24 @@ Rianne Schoon, 10742794
       <h1 class="title">Welcome to these linked views!</h1>
       <h2 class="name">Rianne M. Schoon</h2>
       <p class="intro">
-        These are two interactively linked visualizations! <br>
-        Selecting data in one part has an effect on the other part.<br>
-        Hovering over the data also works in both views!<br>
+        These are two interactively linked visualizations!
       </p>
       <p class="intro">
-      	The world map shows the homicide rates per country.<br>
-      	The scatter plot then shows the Life Expectancy of that country,<br>
-      	as well as the Happy Life Years, and the Gross Domestic Product<br>
-      	Data are plotted by continent, to facilitate country comparison.
+      	The world map shows the number of intentional homicides per 100.000 people.<br>
+        Hover over a country on the map to see the country name and murder information pop up.<br>
+        Feel free to zoom in and out, or to drag the map to your place of interest!
       </p>
+      <p class="intro">
+        The scatter plot below the map shows the life expectancy of some countries,<br>
+        as well as the happy life years, and the gross domestic product (GDP).<br>
+        As you can see, people live longer, happier lives when their countries GDP is higher (bigger dots).<br>
+        Hover over the dots to see the country name and its information pop up.<br>
+        The scattered dots are colored  by continent, to facilitate country comparison.<br>
+        Click on the legend to select data per continent, click two times to visualize all data again!
     </div>
     <div class="chart" id="container">
-
     </div>
     <div class="chart" id="scatter">
-
     </div>
     <script src="linked.js" charset="utf-8"></script>
     <div class="source">

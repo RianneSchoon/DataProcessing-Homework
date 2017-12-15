@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linked</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css"  href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" type="text/css"  href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="linked.css"></link>
+  <script type="text/javascript" src="js/modernizr.custom.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="//d3js.org/topojson.v1.min.js"></script>
+  <script src="//d3js.org/queue.v1.min.js"></script>
+  <script src="linked.js" charset="utf-8"></script>
+</head>
+<body>
+<!-- Navigation -->
+<nav id="menu" class="navbar navbar-default navbar-fixed-top">
+  <div class="container"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand"><i class="fa fa-sun-o"></i>Rianne Schoon<strong></strong></a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#home" class="page-scroll">Home</a></li>
+        <li><a href="#services-section" class="page-scroll">Intro</a></li>
+        <li><a href="#works-section" class="page-scroll">World map</a></li>
+        <li><a href="#about-section" class="page-scroll">Scatterplot</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Header -->
+<header class="text-center" name="home">
+  <div class="intro-text">
+    <h1>Welcome to <strong>linked views!</strong></h1>
+    <p>These are two interactively linked visualizations!</p>
+    <a href="#services-section" class="btn btn-default btn-lg page-scroll">To the intro</a> 
+  </div>
+</header>
+<!-- Services Section -->
+<div id="services-section" class="text-center">
+  <div class="container">
+    <div class="section-title center">
+      <h2>Introduction</h2>
+      <hr>
+      <div class="clearfix"></div>
+      <p>The world map shows the number of intentional homicides per 100.000 people.<br>
+        Hover over a country on the map to see the country name and murder information pop up.<br>
+        Feel free to zoom in and out, or to drag the map to your place of interest!
+      </p>
+      <p>
+        As you click on a country in the map, see the corresponding dot in the scatterplot pop up!<br>
+        No dots will pop up when there is no matching data available in both plots.
+      </p>
+      <div class="space"></div>
+      <p>The scatter plot below the map shows the life expectancy of people per country,<br>
+        as well as the happy life years, and the gross domestic product (GDP).<br>
+        As you can see, people live longer, happier lives when their countries GDP is higher (bigger dots).<br>
+        The scattered dots are colored  by continent, to facilitate country comparison.
+      </p>
+      <p>
+        Hover over the dots to see the country name and its information pop up.<br>
+        Click on the legend to select data per continent, click two times to visualize all data again!
+      </p>
+    </div>
+  </div>
+</div>
+<!-- Worldmap Section -->
+<div id="works-section">
+  <div class="container"> <!-- Container -->
+    <div class="section-title text-center center">
+      <h2>World map - homicide rates per 100.000 people</h2>
+      <hr>
+      <div class="clearfix"></div>
+      <div class="chart" id="container">
+      </div>
+      <div class="source">
+      <a href="https://data.worldbank.org/indicator/VC.IHR.PSRC.P5">Data source homicides: The World Bank</a><br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Scatterplot Section -->
+<div id="about-section">
+  <div class="container">
+    <div class="section-title text-center center">
+      <h2>Scatterplot - Happiness</h2>
+      <hr>
+      <div class="clearfix"></div>
+      <div class="chart" id="scatter">
+      </div>
+      <div class="source">
+      <a href="http://happyplanetindex.org/resources/">Data source happiness: Happy Planet Index</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer Section -->
+<div id="footer">
+  <div class="container">
+    <div class="fnav">
+      <p>Copyright &copy; Helios. Designed by <a href="http://www.templatewire.com" rel="nofollow">TemplateWire</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script type="text/javascript" src="js/jquery.1.11.1.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script type="text/javascript" src="js/bootstrap.js"></script> 
+<script type="text/javascript" src="js/SmoothScroll.js"></script> 
+<script type="text/javascript" src="js/jquery.counterup.js"></script> 
+<script type="text/javascript" src="js/waypoints.js"></script> 
+<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script> 
+<script type="text/javascript" src="js/jquery.isotope.js"></script> 
+<script type="text/javascript" src="js/jqBootstrapValidation.js"></script> 
+<script type="text/javascript" src="js/contact_me.js"></script> 
+
+<!-- Javascripts
+    ================================================== --> 
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

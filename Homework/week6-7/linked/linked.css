@@ -1,4 +1,4 @@
-
+/*
 linked.css
 Style sheet to a webpage that shows two linked visualizations.
 
@@ -7,113 +7,100 @@ Rianne Schoon, 10742794
 Sources and credits:
 */
 
-/* -------------------- css from map template -------------------- */
-
+/* line around country on hover */
 .country:hover{
   stroke: gold;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
 }
-.title,
-.intro {
+
+/* page title centered */
+.title {
   text-align: center;
+  font: 30px tahoma;
 }
+
+/* my name centered */
+.name {
+  text-align: center;
+  font: 21px tahoma;
+}
+
+/* introtext and data source styling */
+.intro, 
+.source {
+  text-align: center;
+  font: 15px tahoma;
+  line-height: 1.5;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
 .text{
   font-size:10px;
   text-align: center;
 }
+
 #container {
   margin:10px 10%;
   border:2px solid royalblue;
   border-radius: 5px;
   height:100%;
   overflow:hidden;
-  background: powderblue;
+  background: lightcyan;
 }
+
 .hidden { 
   display: none; 
 }
+
 div.tooltip {
   color: royalblue; 
   background: lightcyan; 
   padding: .5em; 
-  /*text-shadow: #f5f5f5 0 1px 0;*/
+  text-align: center;
+  font: 15px tahoma;
   border-radius: 2px; 
   box-shadow: 0px 0px 2px 0px royalblue; 
   opacity: 0.9; 
   position: absolute;
 }
+
 .equator {
-  stroke: #ccc;
+  stroke: powderblue;
   stroke-width: 1px;
 }
 
-/* -------------------- css from scatterplot -------------------- 
-
 /* font for axes and ticks */
-body {
+#scatter {
   font: 10px tahoma;
   text-align: center;
   color: black;
 }
 
-/* intro and data source styling */
-/*.intro,
-.source {
-  font: 15px tahoma;
-  line-height: 1.5;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}*/
-
-/* instruction text *//*
-.intro {
-  color: darkslategrey;
-}*/
-
-/* center chart */
-/*svg {
-  margin: auto;
-  display: block;
-}*/
-
 /* color axes */
-/*.axis path,
+.axis path,
 .axis line {
   fill: none;
-  stroke: midnightblue;
+  stroke: royalblue;
+  stroke-width: 1.8px;
   shape-rendering: crispEdges;
 }
-*/
-/* dot color default */
+
+/* dot stroke color default */
 .dot {
   stroke: white;
 }
 
-/* make tooltips*/
-/*.d3-tip {
-  line-height: 1.5;
-  padding: 10px;
-  background: #bee3e8;
-  color: midnightblue;
-  border-radius: 2px;
-}*/
+.sct
+{
+    position: absolute;
+    margin:auto;
+}
 
- /* small point for tooltip */
-/*.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: powderblue;
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-}*/
+#about-section {
+    padding: 0px;
+}
 
- /* fix so that point stays centered on tooltips */
- /*.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
-}*/
+#works-section {
+    padding: 0px;
+}
